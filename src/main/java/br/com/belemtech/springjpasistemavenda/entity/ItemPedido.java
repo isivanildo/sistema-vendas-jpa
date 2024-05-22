@@ -25,10 +25,10 @@ public class ItemPedido {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    public Intger getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
-    public void setQuantidade(Intger quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
