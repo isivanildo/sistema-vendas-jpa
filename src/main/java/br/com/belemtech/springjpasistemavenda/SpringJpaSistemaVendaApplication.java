@@ -26,10 +26,10 @@ public class SpringJpaSistemaVendaApplication {
 			System.out.println("Buscando clientes");
 			clientes.buscarPorNome("Re").forEach(System.out::println);
 
-			// System.out.println("Deletando clientes");
-			// clientes.obterTodos().forEach(c -> {
-			// 	clientes.deletar(c);
-			// });
+			System.out.println("Deletando clientes");
+			clientes.obterTodos().forEach(c -> {
+				clientes.deletar(c);
+			});
 
 			System.out.println("Buscando todos os clientes");
 			todosClientes = clientes.obterTodos();
