@@ -16,12 +16,37 @@ public class SpringJpaSistemaVendaApplication {
 	@Bean
 	public CommandLineRunner init(Clientes clientes) {
 		return args -> {
+			System.out.println("Salvando clientes");
 			clientes.salvar(new Cliente("Ivanildo"));
 			clientes.salvar(new Cliente("Renata"));
 
 			List<Cliente> todosClientes = clientes.obterTodos();
+			todosClientes.forEach(System.out::println);
+
+			System.out.println("Buscando clientes");
+			clientes.buscarPorNome("Re").forEach(System.out::println);
+
+			// System.out.println("Deletando clientes");
+			// clientes.obterTodos().forEach(c -> {
+			// 	clientes.deletar(c);
+			// });
+
+			System.out.println("Buscando todos os clientes");
+			todosClientes = clientes.obterTodos();
+			if (todosClientes.isEmpty()) {
+				System.out.println("Nenhum cliente encontrado");
+			} else {
+				todosClientes.forEach(System.out::println);
+			}
+
+			System.out.println("Atualizando clientes");
+			todosClientes.forEach(c -> {
+				c.setNome(c.getNome() + " Atualizada");
+				clientes.atualizar(c);
+			});
 
 			todosClientes.forEach(System.out::println);
+
 		};
 	}
 
