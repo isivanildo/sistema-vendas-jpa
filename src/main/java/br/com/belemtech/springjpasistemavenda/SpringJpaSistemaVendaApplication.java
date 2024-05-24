@@ -20,9 +20,9 @@ public class SpringJpaSistemaVendaApplication {
 			clientes.save(new Cliente("Ivanildo"));
 			clientes.save(new Cliente("Renata"));
 
-			boolean exists = clientes.existsByNome("Ivanildo33");
+			List<Cliente> result = clientes.buscarPornome("Iva");
 
-			System.out.println("Existe um cliente com nome Ivanildo " + exists);
+			result.forEach(System.out::println);
 
 		};
 	}
