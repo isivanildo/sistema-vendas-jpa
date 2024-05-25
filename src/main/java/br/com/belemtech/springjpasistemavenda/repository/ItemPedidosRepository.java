@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.belemtech.springjpasistemavenda.entity.ItemPedido;
 
-public interface ItemPedidos extends JpaRepository<ItemPedido, Integer> {
+public interface ItemPedidosRepository extends JpaRepository<ItemPedido, Integer> {
 
 }
