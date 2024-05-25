@@ -20,7 +20,7 @@ public class Produto {
     @Column(name = "descricao", length = 100)
     private String descricao;
 
-    @Column(name = "preco", length = 20, precision = 2)
+    @Column(name = "preco", precision = 20, scale = 2)
     private BigDecimal preco;
     
     public Integer getId() {
