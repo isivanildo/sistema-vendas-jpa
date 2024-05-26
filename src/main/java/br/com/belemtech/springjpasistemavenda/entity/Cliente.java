@@ -2,6 +2,8 @@ package br.com.belemtech.springjpasistemavenda.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,9 +24,21 @@ public class Cliente {
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
+
+    @Column(name = "cpf", length = 11)
+    private String cpf;
     
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public List<Pedido> getPedidos() {
         return pedidos;
     }
