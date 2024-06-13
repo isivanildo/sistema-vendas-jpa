@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.belemtech.springjpasistemavenda.dto.AtualizacaoStatusPedidoDTO;
 import br.com.belemtech.springjpasistemavenda.dto.InformacaoPedidoDTO;
 import br.com.belemtech.springjpasistemavenda.dto.InformacoesPedidoDTO;
 import br.com.belemtech.springjpasistemavenda.dto.PedidoDTO;
 import br.com.belemtech.springjpasistemavenda.entity.ItemPedido;
 import br.com.belemtech.springjpasistemavenda.entity.Pedido;
+import br.com.belemtech.springjpasistemavenda.enums.StatusPedido;
 import br.com.belemtech.springjpasistemavenda.service.PedidoService;
 
 @RestController
@@ -58,6 +61,13 @@ public class PedidoController {
         .status(pedido.getStatus().name())
         .items(converter(pedido.getItens()))
         .build();
+    }
+
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO dto) {
+        String novoStatus = dto.getNovoStatus();
+        service.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
     }
 
     private List<InformacaoPedidoDTO> converter(List<ItemPedido> itens) {

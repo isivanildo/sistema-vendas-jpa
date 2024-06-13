@@ -15,6 +15,7 @@ import br.com.belemtech.springjpasistemavenda.entity.ItemPedido;
 import br.com.belemtech.springjpasistemavenda.entity.Pedido;
 import br.com.belemtech.springjpasistemavenda.entity.Produto;
 import br.com.belemtech.springjpasistemavenda.enums.StatusPedido;
+import br.com.belemtech.springjpasistemavenda.exception.PedidoNaoEncontradoException;
 import br.com.belemtech.springjpasistemavenda.exception.RegraNegocioException;
 import br.com.belemtech.springjpasistemavenda.repository.ClienteRepository;
 import br.com.belemtech.springjpasistemavenda.repository.ItemPedidosRepository;
@@ -78,6 +79,16 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return repository.findByIdFetchItens(id);
+    }
+
+    @Override
+    @Transactional
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        repository.findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return repository.save(pedido);
+                }).orElseThrow(() -> new PedidoNaoEncontradoException());
     }
 
 }
