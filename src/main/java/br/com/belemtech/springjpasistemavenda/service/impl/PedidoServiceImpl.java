@@ -14,6 +14,7 @@ import br.com.belemtech.springjpasistemavenda.entity.Cliente;
 import br.com.belemtech.springjpasistemavenda.entity.ItemPedido;
 import br.com.belemtech.springjpasistemavenda.entity.Pedido;
 import br.com.belemtech.springjpasistemavenda.entity.Produto;
+import br.com.belemtech.springjpasistemavenda.enums.StatusPedido;
 import br.com.belemtech.springjpasistemavenda.exception.RegraNegocioException;
 import br.com.belemtech.springjpasistemavenda.repository.ClienteRepository;
 import br.com.belemtech.springjpasistemavenda.repository.ItemPedidosRepository;
@@ -42,6 +43,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemPedido = converterItems(pedido, dto.getItems());
 

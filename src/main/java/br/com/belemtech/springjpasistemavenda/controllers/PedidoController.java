@@ -21,7 +21,6 @@ import br.com.belemtech.springjpasistemavenda.dto.InformacoesPedidoDTO;
 import br.com.belemtech.springjpasistemavenda.dto.PedidoDTO;
 import br.com.belemtech.springjpasistemavenda.entity.ItemPedido;
 import br.com.belemtech.springjpasistemavenda.entity.Pedido;
-import br.com.belemtech.springjpasistemavenda.exception.RegraNegocioException;
 import br.com.belemtech.springjpasistemavenda.service.PedidoService;
 
 @RestController
@@ -56,6 +55,7 @@ public class PedidoController {
         .cpf(pedido.getCliente().getCpf())
         .nomeCliente(pedido.getCliente().getNome())
         .total(pedido.getTotal())
+        .status(pedido.getStatus().name())
         .items(converter(pedido.getItens()))
         .build();
     }
